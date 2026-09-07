@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4af7b2d762b749abb00f79986dbba9b, type: 3}
+  m_Name: Obstacle_005_SO
+  m_EditorClassIdentifier: Assembly-CSharp::RF.Obstacles.ObstacleSO
+  prefab: {fileID: 3708885832639632650, guid: d140297a9cebc4a66aa2bac5ea74f29a, type: 3}
+  spawnHeightMin: 0.5
+  spawnHeightMax: 1.5
+  hasVariableSpawnHeight: 1
