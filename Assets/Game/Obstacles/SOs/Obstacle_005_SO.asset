@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Obstacle_005_SO
   m_EditorClassIdentifier: Assembly-CSharp::RF.Obstacles.ObstacleSO
   prefab: {fileID: 3708885832639632650, guid: d140297a9cebc4a66aa2bac5ea74f29a, type: 3}
-  spawnHeightMin: 0.5
-  spawnHeightMax: 1.5
+  spawnHeightMin: 1
+  spawnHeightMax: 2
   hasVariableSpawnHeight: 1

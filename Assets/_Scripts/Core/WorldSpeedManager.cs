@@ -6,21 +6,20 @@ namespace RF.Core
     public class WorldSpeedManager : MonoBehaviour
     {
         [SerializeField] private float _worldSpeed = 0f;
-        // [SerializeField] private float _addedSpeed = 0f;
         [SerializeField] private float _worldSpeedMax = 15f;
         [SerializeField] private float _timeToMax = 10f;
 
-        private const float baseSpeed = 7f;
+        [SerializeField] private float _baseSpeed = 5f;
 
         private void Awake()
         {
             GameManager.Instance.WorldSpeedManager = this;
-            _worldSpeed = baseSpeed;
+            _worldSpeed = _baseSpeed;
         }
 
         private void Start()
         {
-            _worldSpeed = baseSpeed;
+            _worldSpeed = _baseSpeed;
         }
 
         private void Update()
@@ -59,7 +58,7 @@ namespace RF.Core
 
         private void ResetWorldSpeed()
         {
-            _worldSpeed = baseSpeed;
+            _worldSpeed = _baseSpeed;
         }
     }
 }

@@ -33,6 +33,8 @@ namespace RF.Control
 
         public event Action onDeath;
 
+        public event Action onJump;
+
 
         private void Awake()
         {
@@ -68,6 +70,8 @@ namespace RF.Control
 
         private void Update()
         {
+            if (!ControlsEnabled()) return;
+            
             if (IsGrounded() && input.IsCrawlPressed)
             {
                 Crawl();
@@ -76,6 +80,11 @@ namespace RF.Control
             {
                 CancelCrawl();
             }
+        }
+
+        public bool ControlsEnabled()
+        {
+            return GameManager.Instance.State == GameState.WaitingToStart || GameManager.Instance.State == GameState.Running && !isDead;
         }
 
         public bool IsGrounded()
@@ -100,13 +109,17 @@ namespace RF.Control
 
         private void Jump()
         {
+            if (!ControlsEnabled()) return;
             if (!IsGrounded()) return;
 
             body.linearVelocityY = jumpSpeed;
+
+            onJump?.Invoke();
         }
 
         private void CancelJump()
         {
+            if (!ControlsEnabled()) return;
             if (IsFalling() || IsGrounded()) return;
 
             body.linearVelocityY /= jumpCancelMultiplier;
@@ -114,6 +127,7 @@ namespace RF.Control
 
         private void Crawl()
         {
+            if (!ControlsEnabled()) return;
             if (!IsGrounded()) return;
 
             isCrawling = true;
@@ -121,6 +135,7 @@ namespace RF.Control
 
         private void CancelCrawl()
         {
+            if (!ControlsEnabled()) return;
             isCrawling = false;
         }
 

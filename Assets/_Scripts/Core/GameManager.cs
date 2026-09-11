@@ -1,6 +1,7 @@
 using System;
+using System.Collections;
 using RF.Control;
-using Unity.VisualScripting;
+using RF.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,13 +20,19 @@ namespace RF.Core
         public ObstaclePooler ObstaclePooler { get; set; }
         public ObstacleSpawner ObstacleSpawner { get; set; }
         public WorldSpeedManager WorldSpeedManager { get; set; }
+        public ScoreManager ScoreManager { get; set; }
+
+
+        private bool isReloadingScene;
+        private float initialisingTimer = Mathf.NegativeInfinity;
+        private const float initialiseTimeMax = 1f;
 
 
         // GAME STATE
         [SerializeField] private GameState state;
         public GameState State => state;
 
-        public event Action<GameState> OnStateChanged;
+        public event Action<GameState> onStateChanged;
 
         private void Awake()
         {
@@ -42,6 +49,8 @@ namespace RF.Core
         {
             InputManager.onJumpStarted += StartGameWithInput;
             InputManager.onCrawlStarted += StartGameWithInput;
+
+            SetState(GameState.WaitingToStart, true);
         }
 
         private void OnDisable()
@@ -62,7 +71,7 @@ namespace RF.Core
                 SetWaitingToStart();
             }
         }
-
+        
         public void SetWaitingToStart()
         {
             SetState(GameState.WaitingToStart);
@@ -79,13 +88,16 @@ namespace RF.Core
             SetState(GameState.GameOver);
         }
 
+
         public void SetState(GameState newState, bool forceReset = false)
         {
             if (newState == state && !forceReset) return;
 
+            initialisingTimer = 0f;
+
             state = newState;
 
-            OnStateChanged?.Invoke(state);
+            onStateChanged?.Invoke(state);
         }
     }
 
